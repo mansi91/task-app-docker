@@ -1,0 +1,18 @@
+﻿services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '80:80'
+    networks:
+      - app-net
+  
+  backend:
+    build: ./backend
+    ports:
+      - '5000:5000'
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge

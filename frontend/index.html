@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head><title>Task App</title></head>
+<body>
+    <h1>Tasks</h1>
+    <ul id="tasks"></ul>
+    <button onclick="addTask()">Add Task</button>
+    <script>
+        const API_URL = 'http://localhost:5000/tasks';
+        async function loadTasks() {
+            const res = await fetch(API_URL);
+            const tasks = await res.json();
+            document.getElementById('tasks').innerHTML = 
+                tasks.map(t => `<li>Task ${t.id}: ${t.title}</li>`).join('');
+        }
+        async function addTask() {
+            await fetch(`${API_URL}/6`, {method: 'POST'});
+            loadTasks();
+        }
+        loadTasks();
+    </script>
+</body>
+</html>
